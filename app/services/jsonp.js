@@ -8,7 +8,7 @@
         this.jsonp = function(url, arg, fn){
             var queryString = '';
             for(var key in arg){
-                queryString += key + ' =' + arg[key] + '&';
+                queryString += key + '=' + arg[key] + '&';
             }
             url += '?' + queryString;
             var callbackName = 'jsonp_' + Math.random().toString().substr(2);
