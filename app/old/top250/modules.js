@@ -3,8 +3,8 @@
  */
 (function(angular){
     angular = window.angular;
-    var app = angular.module('moviecat.comming_soon',['ngRoute']);
+    var app = angular.module('moviecat.top250',['ngRoute']);
     app.config(['$routeProvider',function($routeProvider){
-        $routeProvider.when('/comming_soon',{templateUrl:'comming_soon/view.html'})
+        $routeProvider.when('/top250',{templateUrl:'/view.html'})
     }])
 })(angular)

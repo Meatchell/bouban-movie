@@ -8,8 +8,8 @@
 
     //≈‰÷√¬∑”…
     app.config(['$routeProvider',function($routeProvider){
-        $routeProvider.when('/in_theaters',{
-            templateUrl:'in_theaters/view.html',
+        $routeProvider.when('/:movieType/:page?',{
+            templateUrl:'/view.html',
             controller:'in_theaters'
         })
     }])
@@ -20,7 +20,7 @@
         $scope.nowPage = ($routeParams.page || '1') - 0;
 
         var start = ($scope.nowPage - 1)*$scope.pageSize;
-        myHttp.jsonp('http://api.douban.com/v2/movie/in_theaters',
+        myHttp.jsonp('http://api.douban.com/v2/movie/' + $routeParams.movieType,
             {start:start,count:$scope.pageSize},
             function(info){
             $scope.total = info.total;
