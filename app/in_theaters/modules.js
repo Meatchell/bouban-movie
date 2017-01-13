@@ -17,17 +17,25 @@
     ////´´½¨¿ØÖÆÆ÷
     app.controller('in_theaters',function($scope,$http,$routeParams,$route,myHttp){
         $scope.pageSize = 10;
-        $scope.newPage = ($routeParams.page || '1') - 0;
+        $scope.nowPage = ($routeParams.page || '1') - 0;
 
-        var start = ($scope.newPage - 1)*$scope.pageSize;
+        var start = ($scope.nowPage - 1)*$scope.pageSize;
         myHttp.jsonp('http://api.douban.com/v2/movie/in_theaters',
             {start:start,count:$scope.pageSize},
             function(info){
-            console.log(start,$scope.pageSize)
+            $scope.total = info.total;
+            $scope.totalPage = Math.ceil(info.total/$scope.pageSize)
             $scope.data = info
             $scope.$apply();
             console.log(info)
-        })
+        });
+
+        $scope.goPage = function(newPage){
+            if(newPage < 1 || newPage > $scope.totalPage){
+                return;
+            }
+            $route.updateParams({page:newPage})
+        }
 
     })
 
