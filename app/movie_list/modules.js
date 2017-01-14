@@ -18,7 +18,7 @@
     app.controller('movie_list',function($scope,$http,$routeParams,$route,myHttp){
         $scope.pageSize = 10;
         $scope.nowPage = ($routeParams.page || '1') - 0;
-
+        $scope.loading = true;
         var start = ($scope.nowPage - 1)*$scope.pageSize;
         myHttp.jsonp('http://api.douban.com/v2/movie/' + $routeParams.movieType,
             {start:start,count:$scope.pageSize},
@@ -26,6 +26,7 @@
             $scope.total = info.total;
             $scope.totalPage = Math.ceil(info.total/$scope.pageSize)
             $scope.data = info
+            $scope.loading = false;
             $scope.$apply();
             console.log(info)
         });
